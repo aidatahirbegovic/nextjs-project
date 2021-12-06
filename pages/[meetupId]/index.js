@@ -43,9 +43,11 @@ export async function getStaticPaths() {
   client.close();
   //returns object where we describe all dynamic values
   return {
-    fallback: false, //this key tells js weather all keys in ppaths have suported value or just some of them
+    fallback: 'blocking', // blocking - the list of paths might be bigger, might have more valid//false, //this key tells js weather all keys in ppaths have suported value or just some of them
     //false - all paths suport meetupIds values - if someone enters m3, they will see 404 errir
     //true - they will try to generate a page for this id dynamicly
+    //true will immidietly return empty page, blocking user will not see anything till the page was pergenerated
+    
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })), //generating array of paths dynamicly
